@@ -49,7 +49,12 @@ namespace Aoe.Scaner.Syn
             }
             _localMacAddr = _device.Interface.MacAddress;
 
+           
+
             _targetIpAddr = Dns.GetHostAddresses(_target).First(x => x.AddressFamily == AddressFamily.InterNetwork);
+            ARP arp = new ARP(_device);
+            var gatewayIpAddr = _device.Interface.GatewayAddresses[0];
+            _targetMacAddr = arp.Resolve(gatewayIpAddr, _localIpAddr, _localMacAddr);
 
             _device.Open(DeviceMode.Promiscuous, 100);
 
@@ -78,17 +83,16 @@ namespace Aoe.Scaner.Syn
                 if (arrivedTcpPacket == null) { return; }
 
                 var sourcePort = arrivedTcpPacket.SourcePort;
-                //if (arrivedTcpPacket.Rst)
-                //{
-                //    Monitor.Enter(filteredPorts);
-                //    if (filteredPorts.Contains(sourcePort))
-                //        return;
-                //    filteredPorts.Add(sourcePort);
-                //    Monitor.Pulse(filteredPorts);
+                if (arrivedTcpPacket.Reset)
+                {
+                    Monitor.Enter(_filteredPorts);
+                    if (_filteredPorts.Contains(sourcePort))
+                        return;
+                    _filteredPorts.Add(sourcePort);
+                    Monitor.Pulse(_filteredPorts);
 
-                //    if (shouldPrint)
-                //        Console.WriteLine("Filtered: {0}", sourcePort);
-                //}
+                    Console.WriteLine("Filtered Port: {0}", sourcePort);
+                }
                 //else
                 if (arrivedTcpPacket.Synchronize && arrivedTcpPacket.Acknowledgment)
                 {
@@ -116,14 +120,15 @@ namespace Aoe.Scaner.Syn
             };
 
             _device.Filter = "ip and tcp";
-
+           
             //开始扫描
             _device.StartCapture();
 
             
+            
 
             var tasks = new List<Task>();
-            for (ushort i = _scanStartPort; i < _scanEndPort; i++)
+            for (ushort i = _scanStartPort; i <= _scanEndPort; i++)
             {
                 var ethernetPacket = GenerateEthernetPacket(i, isSyn:true);
 
@@ -132,12 +137,12 @@ namespace Aoe.Scaner.Syn
                 {
                     var timeoutMs = 128;
 
-                    for (var j = 0; j < 4; j++)
+                    for (var j = 0; j < 1; j++)
                     {
                         _device.SendPacket(ethernetPacket);
-                        if (_openPorts.Contains(portNum) || _filteredPorts.Contains(portNum))
-                            return;
-                        await Task.Delay(timeoutMs * j);
+                        //if (_openPorts.Contains(portNum) || _filteredPorts.Contains(portNum))
+                        //    return;
+                        //await Task.Delay(timeoutMs * j);
                     }
                 });
 
@@ -186,7 +191,10 @@ namespace Aoe.Scaner.Syn
             {
                 return CreateEthernetPacket(_localMacAddr, _targetMacAddr, ipPacket);
             }
-            return CreateEthernetPacket(_localMacAddr, new PhysicalAddress(new byte[] { 0,0,0,0,0,0}), ipPacket);
+            else
+            {
+                throw new NullReferenceException("目标Mac地址为空！");
+            }
 
         }
     }
