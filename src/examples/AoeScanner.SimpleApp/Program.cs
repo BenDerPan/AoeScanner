@@ -1,16 +1,14 @@
-﻿using Aoe.Scaner.Arp;
-using Aoe.Scaner.Device;
-using Aoe.Scaner.Syn;
+﻿using Aoe.Scaner.Syn;
 using System;
 using System.Diagnostics;
 using System.Net;
 
-namespace AoeScaner.SimpleApp
+namespace AoeScanner.SimpleApp
 {
     class Program
     {
         static void Main(string[] args)
-        {
+      {
             string localIp = string.Empty;
             while (true)
             {
@@ -36,7 +34,7 @@ namespace AoeScaner.SimpleApp
                 {
                     Stopwatch watch = new Stopwatch();
                     
-                    SynScaner scaner = new SynScaner(localIp, cmd);
+                    SynScanner scaner = new SynScanner(localIp, cmd);
                     watch.Start();
                     scaner.Scan();
                     watch.Stop();

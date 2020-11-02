@@ -7,7 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 
-namespace Aoe.Scaner.Device
+namespace Aoe.Scanner.Device
 {
     public class DeviceHelper
     {

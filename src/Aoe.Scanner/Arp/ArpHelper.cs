@@ -9,7 +9,7 @@ using SharpPcap.LibPcap;
 using SharpPcap.Npcap;
 using SharpPcap.WinPcap;
 
-namespace Aoe.Scaner.Arp
+namespace Aoe.Scanner.Arp
 {
    public class ArpHelper
     {
@@ -25,8 +25,6 @@ namespace Aoe.Scaner.Arp
             {
             }
             return macAddress != null;
-
-
         }
 
     }

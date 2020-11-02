@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30621.155
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{8B056303-7E4C-4DD0-BC0A-79B51928C419}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AoeScanner.SimpleApp", "examples\AoeScanner.SimpleApp\AoeScanner.SimpleApp.csproj", "{0FE281E1-DAC1-4EFE-83F2-AEF28170505D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aoe.Scanner", "Aoe.Scanner\Aoe.Scanner.csproj", "{40E54B77-75C8-4BBB-AB69-D691FC52E518}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0FE281E1-DAC1-4EFE-83F2-AEF28170505D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FE281E1-DAC1-4EFE-83F2-AEF28170505D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FE281E1-DAC1-4EFE-83F2-AEF28170505D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FE281E1-DAC1-4EFE-83F2-AEF28170505D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40E54B77-75C8-4BBB-AB69-D691FC52E518}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40E54B77-75C8-4BBB-AB69-D691FC52E518}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40E54B77-75C8-4BBB-AB69-D691FC52E518}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40E54B77-75C8-4BBB-AB69-D691FC52E518}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0FE281E1-DAC1-4EFE-83F2-AEF28170505D} = {8B056303-7E4C-4DD0-BC0A-79B51928C419}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9CDEA7BD-70AC-47C3-9086-2FA4A6AC8912}
+	EndGlobalSection
+EndGlobal
